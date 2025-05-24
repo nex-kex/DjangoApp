@@ -1,0 +1,65 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Процессоры",
+        "description": "Основные комплектующие для ПК"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Видеокарты",
+        "description": "Основные комплектующие для ПК"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Вентиляторы для корпуса",
+        "description": "Моддинг и обслуживание"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "AMD Ryzen 7 7800X3D OEM",
+        "description": "AM5, 8 x 4,2 ГГц, L2 - 8 МБ, L3 - 96 МБ, 2 х DDR5-5200 МГц, AMD Radeon Graphics, TDP 120 Вт",
+        "image": "",
+        "category": 1,
+        "price": 37799,
+        "created_at": "2025-05-24",
+        "updated_at": "2025-05-24"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "AMD Ryzen 5 7500F OEM",
+        "description": "AM5, 6 x 3.7 ГГц, L2 - 6 МБ, L3 - 32 МБ, 2 х DDR5-5200 МГц, TDP 65 Вт",
+        "image": "",
+        "category": 1,
+        "price": 13799,
+        "created_at": "2025-05-24",
+        "updated_at": "2025-05-24"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Palit GeForce RTX 4060 Infinity 2 [NE64060019P1-1070L]",
+        "description": "PCIe 4,0 8 ГБ GDDR6, 128 бит, 3 x DisplayPort, HDMI, GPU 1830 МГц",
+        "image": "",
+        "category": 2,
+        "price": 30999,
+        "created_at": "2025-05-24",
+        "updated_at": "2025-05-24"
+    }
+}
+]
