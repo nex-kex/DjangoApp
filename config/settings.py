@@ -1,12 +1,16 @@
 from pathlib import Path
-
+import os
+from dotenv import load_dotenv
 from django.conf.global_settings import MEDIA_URL, MEDIA_ROOT
+
+
+load_dotenv(override=True)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-snj!l1^fgb!=7l5j2(9ed493rk()0z)$*qd&y+#peb5qj3v%va'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = True
+DEBUG = True if os.getenv("DEBUG") == "True" else False
 
 ALLOWED_HOSTS = []
 
@@ -52,8 +56,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv("NAME"),
+        'USER': os.getenv("USER"),
+        'HOST': os.getenv("HOST"),
+        'PORT': os.getenv("PORT"),
+        'PASSWORD': os.getenv("PASSWORD"),
     }
 }
 
