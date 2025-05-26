@@ -1,0 +1,44 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">
+        {{ product.name }}
+    </h1>
+    <p class="lead">
+
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <img src="/media/{{ product.image }}" class="card-img-top" alt="">
+    </div>
+    <div class="col-6">
+        <div class="card m-3">
+            <div class="card-body">
+                <h1 class="fw-bold">
+                    {{ product.price }} руб.
+                </h1>
+                <p class="card-text"><small class="text-body-secondary">
+                    {{ product.category }}
+                </small></p>
+                <p class="card-text">
+                    {{ product.description }}
+                </p>
+                <div class="input-group mb-3">
+                    <button class="btn btn-outline-primary" type="button">Купить</button>
+                </div>
+                <p class="card-text"><small class="text-body-secondary">
+                    Создано {{ product.created_at | date:"d.m.Y" }}.
+                    Последнее обновление {{ product.updated_at | date:"d.m.Y" }}
+                </small></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

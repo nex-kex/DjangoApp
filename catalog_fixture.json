@@ -25,41 +25,67 @@
 },
 {
     "model": "catalog.product",
-    "pk": 1,
+    "pk": 5,
     "fields": {
-        "name": "AMD Ryzen 7 7800X3D OEM",
-        "description": "AM5, 8 x 4,2 ГГц, L2 - 8 МБ, L3 - 96 МБ, 2 х DDR5-5200 МГц, AMD Radeon Graphics, TDP 120 Вт",
-        "image": "",
-        "category": 1,
-        "price": 37799,
+        "name": "Комплект вентиляторов LIAN LI UNI FAN SL V2 120 [G99.12SLV23B.R0]",
+        "description": "120 x 120 мм, SATA Power (15 pin), 250 об/мин - 2000 об/мин, - 29,2 дБ, в комплекте - 3",
+        "image": "catalog/media/245b9c2a2cf30b7631961ffac5970e7ceaec850f9d4decac67469d320edf8652.jpg.webp",
+        "category": 3,
+        "price": 7699,
         "created_at": "2025-05-24",
         "updated_at": "2025-05-24"
     }
 },
 {
     "model": "catalog.product",
-    "pk": 2,
+    "pk": 6,
     "fields": {
-        "name": "AMD Ryzen 5 7500F OEM",
-        "description": "AM5, 6 x 3.7 ГГц, L2 - 6 МБ, L3 - 32 МБ, 2 х DDR5-5200 МГц, TDP 65 Вт",
-        "image": "",
+        "name": "Процессор Intel Core i5-12400F OEM",
+        "description": "LGA 1700, 6 x 2,5 ГГц, L2 - 7.5 МБ, L3 - 18 МБ, 2 х DDR4, DDR5-4800 МГц, TDP 117 Вт",
+        "image": "catalog/media/200e4a08e74afcc3cf1d54d47b758cbbf14c71973a64009553347d2b234b5af4.jpg.webp",
         "category": 1,
-        "price": 13799,
+        "price": 9699,
         "created_at": "2025-05-24",
-        "updated_at": "2025-05-24"
+        "updated_at": "2025-05-25"
     }
 },
 {
     "model": "catalog.product",
-    "pk": 3,
+    "pk": 7,
     "fields": {
-        "name": "Palit GeForce RTX 4060 Infinity 2 [NE64060019P1-1070L]",
-        "description": "PCIe 4,0 8 ГБ GDDR6, 128 бит, 3 x DisplayPort, HDMI, GPU 1830 МГц",
-        "image": "",
+        "name": "Процессор Intel Core i5-12400 OEM",
+        "description": "LGA 1700, 6 x 2,5 ГГц, L2 - 7,5 МБ, L3 - 18 МБ, 2 х DDR4, DDR5-4800 МГц, Intel UHD Graphics 730, TDP 117 Вт",
+        "image": "catalog/media/13695d4cf06fee91b4ae558e71766270e404a3234357dea01f294deae7cae632.jpg.webp",
+        "category": 1,
+        "price": 12299,
+        "created_at": "2025-05-24",
+        "updated_at": "2025-05-25"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+        "name": "Видеокарта Palit GeForce RTX 4060 Infinity 2 [NE64060019P1-1070L]",
+        "description": "PCIe 4.0 8 ГБ GDDR6, 128 бит, 3 x DisplayPort, HDMI, GPU 1830 МГц",
+        "image": "catalog/media/12d4639330e37b528d4e33fd9f5389f6acdb14f3186ca8cb9dd49d74a5d095f7.jpg.webp",
         "category": 2,
         "price": 30999,
-        "created_at": "2025-05-24",
-        "updated_at": "2025-05-24"
+        "created_at": "2025-05-25",
+        "updated_at": "2025-05-25"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+        "name": "Клавиатура проводная Дарк Проджект KD87A [DP-KD87A-000100-GMS]",
+        "description": "механическая g3ms Moonstone, клавиш - 87, USB Type-A, черный",
+        "image": "catalog/media/eb1420229e247b134b87beffcf77d21bc981b5abbf8b9012ecbbc778f675e083.jpg.webp",
+        "category": null,
+        "price": 6999,
+        "created_at": "2025-05-25",
+        "updated_at": "2025-05-25"
     }
 }
 ]

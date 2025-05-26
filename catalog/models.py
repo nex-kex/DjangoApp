@@ -21,17 +21,18 @@ class Product(models.Model):
     description = models.TextField(
         verbose_name="Описание продукта", null=True, blank=True
     )
-    image = models.ImageField(upload_to="catalog/media/")
+    image = models.ImageField(upload_to="catalog/media/", verbose_name="Изображение")
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
         related_name="products",
         null=True,
         blank=True,
+        verbose_name = "Категория продукта"
     )
     price = models.IntegerField(verbose_name="Цена")
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    created_at = models.DateField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateField(auto_now=True, verbose_name="Дата последнего изменения")
 
     def __str__(self):
         return self.name
