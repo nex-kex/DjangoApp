@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from .models import Product
 
@@ -27,11 +27,17 @@ class ProductCreateView(CreateView):
     fields = ('name', 'description', 'image', 'category', 'price')
     success_url = reverse_lazy('catalog:product_list')
 
+    def get_success_url(self):
+        return reverse_lazy('catalog:product_detail', args=[self.object.pk])
+
 
 class ProductUpdateView(UpdateView):
     model = Product
     fields = ('name', 'description', 'image', 'category', 'price')
     success_url = reverse_lazy('catalog:product_list')
+
+    def get_success_url(self):
+        return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])
 
 
 class ProductDeleteView(DeleteView):
