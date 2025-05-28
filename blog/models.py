@@ -8,7 +8,7 @@ class Post(models.Model):
         upload_to="blog/media/", null=True, blank=True, verbose_name="Превью"
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    is_published = models.BooleanField(default=False, verbose_name="Признак публикации")
+    is_published = models.BooleanField(default=False, verbose_name="Опубликовать")
     views_count = models.PositiveIntegerField(
         default=0, verbose_name="Количество просмотров"
     )
