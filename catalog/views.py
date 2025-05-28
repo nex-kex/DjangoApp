@@ -1,14 +1,15 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import (
-    ListView,
-    DetailView,
     CreateView,
     DeleteView,
-    UpdateView,
+    DetailView,
+    ListView,
     TemplateView,
+    UpdateView,
 )
+
 from .models import Product
 
 
