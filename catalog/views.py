@@ -1,17 +1,19 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView, TemplateView
 from .models import Product
 
 
-def contacts(request):
-    if request.method == "POST":
+class ContactsView(TemplateView):
+    template_name = "catalog/contacts.html"
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
         name = request.POST.get("name")
-        # phone = request.POST.get("phone")
-        # message = request.POST.get("message")
         return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
-    return render(request, "catalog/contacts.html")
 
 
 class ProductListView(ListView):
