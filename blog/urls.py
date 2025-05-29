@@ -1,10 +1,10 @@
 from django.urls import path
 
-from catalog.apps import CatalogConfig
+from blog.apps import BlogConfig
 
 from . import views
 
-app_name = CatalogConfig.name
+app_name = BlogConfig.name
 
 urlpatterns = [
     path("<int:pk>/", views.PostDetailView.as_view(), name="post_detail"),
