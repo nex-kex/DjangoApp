@@ -48,3 +48,14 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     model = Post
     success_url = reverse_lazy("blog:post_list")
+
+
+class PublishPost(UpdateView):
+    model = Post
+    fields = []
+    success_url = reverse_lazy("blog:post_list")
+
+    def form_valid(self, form):
+        self.object.is_published = True
+        self.object.save()
+        return  super().form_valid(form)

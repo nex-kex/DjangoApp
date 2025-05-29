@@ -26,14 +26,24 @@
                 <p class="card-text">
                     {{ object.text }}
                 </p>
-                {% if object.is_published %}
-                {% else %}
-                <div class="input-group mb-3">
-                    <a class="btn btn-outline-primary" href="{% url 'blog:post_update' object.pk %}">Опубликовать</a>
+                <div class="mb-3">
+                    <form method="post" action="{% url 'blog:publish' object.pk %}">
+                        {% if object.is_published %}
+                        {% else %}
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn btn-outline-primary" type="submit">
+                            Опубликовать
+                        </button>
+                        {% endif %}
+                        <a href="{% url 'blog:post_update' object.pk %}"
+                           class="btn btn-outline-secondary">Редактировать</a>
+                        <a href="{% url 'blog:post_delete' object.pk %}"
+                           class="btn btn-outline-danger">Удалить</a>
+                    </form>
                 </div>
-                {% endif %}
                 <p class="card-text"><small class="text-body-secondary">
-                    Создано {{ object.created_at | date:"d.m.Y" }}
+                    Создано {{ object.created_at | date:"H:i:s d.m.Y" }}
                 </small></p>
             </div>
         </div>
