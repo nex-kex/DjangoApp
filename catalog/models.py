@@ -28,11 +28,13 @@ class Product(models.Model):
         related_name="products",
         null=True,
         blank=True,
-        verbose_name = "Категория продукта"
+        verbose_name="Категория продукта",
     )
     price = models.IntegerField(verbose_name="Цена")
     created_at = models.DateField(auto_now_add=True, verbose_name="Дата создания")
-    updated_at = models.DateField(auto_now=True, verbose_name="Дата последнего изменения")
+    updated_at = models.DateField(
+        auto_now=True, verbose_name="Дата последнего изменения"
+    )
 
     def __str__(self):
         return self.name

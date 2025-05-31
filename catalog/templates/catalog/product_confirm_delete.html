@@ -1,0 +1,22 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Mystore{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Удаление товара</h1>
+    <p>Вы действительно хотите удалить товар "{{ object.name }}"?</p>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+        <button type="submit" class="btn btn-danger m-2">
+            Удалить
+        </button>
+        <a class="btn" class="btn btn-secondary m-2" href="{% url 'catalog:product_list' %}">
+            Отмена
+        </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

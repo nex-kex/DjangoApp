@@ -1,13 +1,13 @@
 {% extends 'catalog/base.html' %}
 
-{% block title %}Skystore{% endblock %}
+{% block title %}Mystore{% endblock %}
 
 {% block content %}
 
 {% include 'catalog/header.html' %}
 
 <div class="row text-center">
-    {% for product in products %}
+    {% for product in object_list %}
     <div class="col-3">
 
         <div class="card mb-4 box-shadow">
@@ -20,8 +20,14 @@
                     {{ product.price }} руб.
                 </h1>
                 <p style="height: 70px">{{ product.description | truncatechars:100}}</p>
-                <a href="product_details/{{ product.id }}"
-                   class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
+                <a href="{% url 'catalog:product_detail' product.pk %}"
+                   class="btn btn-lg btn-block btn-outline-primary m-1">Подробнее</a>
+                <div class="btn-group m-1">
+                    <a href="{% url 'catalog:product_update' product.pk %}"
+                       class="btn btn-lg btn-block btn-outline-secondary">Редактировать</a>
+                    <a href="{% url 'catalog:product_delete' product.pk %}"
+                       class="btn btn-lg btn-block btn-outline-secondary">Удалить</a>
+                </div>
             </div>
         </div>
     </div>

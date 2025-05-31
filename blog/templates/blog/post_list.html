@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Все записи{% endblock %}
+
+{% block content %}
+
+{% include 'blog/header.html' %}
+
+<div class="row text-center">
+    {% for blog_post in object_list %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <img src="/media/{{ blog_post.image }}" class="card-img" alt="">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ blog_post.title }}</h4>
+            </div>
+            <div class="card-body">
+                <p>{{ blog_post.text | truncatechars:100}}</p>
+                <a href="{% url 'blog:post_detail' blog_post.pk %}"
+                   class="btn btn-outline-primary m-1">Читать полностью</a>
+                <div class="m-1">
+                    <a href="{% url 'blog:post_update' blog_post.pk %}"
+                       class="btn btn-outline-secondary">Редактировать</a>
+                    <a href="{% url 'blog:post_delete' blog_post.pk %}"
+                       class="btn btn-outline-danger">Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

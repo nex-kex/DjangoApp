@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Удаление записи{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Вы перешли на страницу удаления записи</h1>
+    <p>Вы действительно хотите удалить запись на тему "{{ object.title }}"?</p>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+        <button type="submit" class="btn btn-danger m-2">
+            Удалить
+        </button>
+        <a class="btn" class="btn btn-secondary m-2" href="{% url 'blog:post_list' %}">
+            Отмена
+        </a>
+        </form>
+    </div>
+</div>
+{% endblock %}
