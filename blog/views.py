@@ -1,7 +1,11 @@
-from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
-                                  TemplateView, UpdateView)
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 
 from .models import Post
 
@@ -58,4 +62,4 @@ class PublishPost(UpdateView):
     def form_valid(self, form):
         self.object.is_published = True
         self.object.save()
-        return  super().form_valid(form)
+        return super().form_valid(form)
