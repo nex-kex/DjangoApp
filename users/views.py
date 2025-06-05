@@ -1,7 +1,9 @@
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.edit import FormView
-from .forms import CustomUserCreationForm
+from django.views.generic import DetailView, UpdateView
+from .models import CustomUser
+from .forms import CustomUserCreationForm, UserForm
 from django.db.utils import IntegrityError
 from django.contrib.auth import login
 from django.core.mail import send_mail
@@ -38,3 +40,15 @@ class LoginView(View):
 class LogoutView(View):
     template_name = 'users/logout.html'
     next_page = reverse_lazy('catalog:product_list')
+
+
+class UserDetailView(DetailView):
+    model = CustomUser
+    template_name = "users/user_detail.html"
+
+
+class UserUpdateView(UpdateView):
+    model = CustomUser
+    template_name = "users/user_form.html"
+    form_class = UserForm
+    success_url = reverse_lazy("catalog:product_list")

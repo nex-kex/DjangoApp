@@ -4,6 +4,18 @@ from django import forms
 from .models import CustomUser
 
 
+class UserForm(UserCreationForm):
+
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({"class": "form-control"})
+
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
+        fields = ("first_name", "last_name", "phone_number", "country", "avatar")
+
+
 class CustomUserCreationForm(UserCreationForm):
     avatar = forms.ImageField(required=False, help_text="Изображение. Необязательное поле.")
     phone_number = forms.CharField(max_length=15, required=False, help_text="Номер телефона. Необязательное поле.")
