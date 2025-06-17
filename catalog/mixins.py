@@ -1,6 +1,3 @@
-from django import forms
-
-
 class FormControlMixin:
     def __init__(self, *args, **kwargs):
         super(FormControlMixin, self).__init__(*args, **kwargs)
