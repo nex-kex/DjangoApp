@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseForbidden
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -9,6 +9,7 @@ from django.views.generic import (
     ListView,
     TemplateView,
     UpdateView,
+    View,
 )
 
 from .forms import ProductForm
@@ -55,3 +56,18 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy("catalog:product_list")
+
+    class ProductUnpublishView(LoginRequiredMixin, View):
+
+        def post(self, request, product_id):
+            product = get_object_or_404(Product, id=product_id)
+
+            if not request.user.has_perm('product.can_unpublish_product'):
+                return HttpResponseForbidden("У вас нет прав для изменения статуса публикации продуктов.")
+
+            # Контроллер для смены статуса: можно снять с публикации и наоборот
+            product.status = not product.status
+            product.save()
+
+            return redirect("catalog:product_list")
+
