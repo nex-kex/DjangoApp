@@ -32,7 +32,9 @@ class Product(models.Model):
     )
     price = models.IntegerField(verbose_name="Цена")
     created_at = models.DateField(auto_now_add=True, verbose_name="Дата создания")
-    updated_at = models.DateField(auto_now=True, verbose_name="Дата последнего изменения")
+    updated_at = models.DateField(
+        auto_now=True, verbose_name="Дата последнего изменения"
+    )
     status = models.BooleanField(default=False, verbose_name="Статус публикации")
 
     def __str__(self):
@@ -43,5 +45,5 @@ class Product(models.Model):
         verbose_name_plural = "Продукты"
         ordering = ["name", "category", "description"]
         permissions = [
-            ('can_unpublish_product', 'Can unpublish product'),
+            ("can_unpublish_product", "Can unpublish product"),
         ]

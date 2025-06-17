@@ -1,19 +1,21 @@
-from django.urls import reverse_lazy
-from django.views import View
-from django.views.generic.edit import FormView
-from django.views.generic import DetailView, UpdateView
-from .models import CustomUser
-from .forms import CustomUserCreationForm, UserForm
-from django.db.utils import IntegrityError
+import os
+
 from django.contrib.auth import login
 from django.core.mail import send_mail
-import os
+from django.db.utils import IntegrityError
+from django.urls import reverse_lazy
+from django.views import View
+from django.views.generic import DetailView, UpdateView
+from django.views.generic.edit import FormView
+
+from .forms import CustomUserCreationForm, UserForm
+from .models import CustomUser
 
 
 class RegisterView(FormView):
     form_class = CustomUserCreationForm
-    template_name = 'users/register.html'
-    success_url = reverse_lazy('catalog:product_list')
+    template_name = "users/register.html"
+    success_url = reverse_lazy("catalog:product_list")
 
     def form_valid(self, form):
         try:
@@ -23,7 +25,7 @@ class RegisterView(FormView):
             return super().form_valid(form)
 
         except IntegrityError:
-            form.add_error('email', "Пользователь с таким email уже существует")
+            form.add_error("email", "Пользователь с таким email уже существует")
             return self.form_invalid(form)
 
     def send_welcome_email(self, email):
@@ -34,12 +36,12 @@ class RegisterView(FormView):
 
 
 class LoginView(View):
-    template_name = 'users/login.html'
+    template_name = "users/login.html"
 
 
 class LogoutView(View):
-    template_name = 'users/logout.html'
-    next_page = reverse_lazy('catalog:product_list')
+    template_name = "users/logout.html"
+    next_page = reverse_lazy("catalog:product_list")
 
 
 class UserDetailView(DetailView):

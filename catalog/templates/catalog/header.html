@@ -2,8 +2,10 @@
     <h1 class="display-4">Mystore</h1>
     <p class="lead">Mystore - это магазин комплектующих для ПК.</p>
 
+    {% if perms.product.create_product %}
     <a type="submit" class="btn btn-primary" href="{% url 'catalog:product_create' %}">
         Добавить продукт
     </a>
+    {% endif %}
 
 </div>

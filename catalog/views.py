@@ -1,6 +1,6 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -35,39 +35,44 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
 
-class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
+    permission_required = "product.create_product"
     success_url = reverse_lazy("catalog:product_list")
 
     def get_success_url(self):
         return reverse_lazy("catalog:product_detail", args=[self.object.pk])
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
+    permission_required = "product.update_product"
     success_url = reverse_lazy("catalog:product_list")
 
     def get_success_url(self):
         return reverse("catalog:product_detail", args=[self.kwargs.get("pk")])
 
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Product
+    permission_required = "product.delete_product"
     success_url = reverse_lazy("catalog:product_list")
 
-    class ProductUnpublishView(LoginRequiredMixin, View):
 
-        def post(self, request, product_id):
-            product = get_object_or_404(Product, id=product_id)
+class ProductUnpublishView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = "product.can_unpublish_product"
 
-            if not request.user.has_perm('product.can_unpublish_product'):
-                return HttpResponseForbidden("У вас нет прав для изменения статуса публикации продуктов.")
+    def post(self, request, *args, **kwargs):
+        product = get_object_or_404(Product, pk=self.kwargs["pk"])
 
-            # Контроллер для смены статуса: можно снять с публикации и наоборот
-            product.status = not product.status
-            product.save()
+        if not request.user.has_perm("product.can_unpublish_product"):
+            return HttpResponseForbidden(
+                "У вас нет прав для изменения статуса публикации продуктов."
+            )
 
-            return redirect("catalog:product_list")
+        product.status = False
+        product.save()
 
+        return redirect("catalog:product_list")
