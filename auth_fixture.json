@@ -333,15 +333,36 @@
     }
 },
 {
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can publish product",
+        "content_type": 8,
+        "codename": "can_publish_product"
+    }
+},
+{
     "model": "auth.group",
     "pk": 1,
     "fields": {
         "name": "Модераторы продуктов",
         "permissions": [
             25,
+            38,
             37,
             26,
             27,
+            28
+        ]
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+        "name": "Пользователи",
+        "permissions": [
+            25,
             28
         ]
     }
