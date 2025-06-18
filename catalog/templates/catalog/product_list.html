@@ -8,42 +8,48 @@
 
 <div class="row text-center">
     {% for product in object_list %}
-    {% if product.status %}
     <div class="col-3">
+        {% if product.status == False %}
+        <div class="card mb-4 box-shadow text-bg-dark">
+        {% else %}
         <div class="card mb-4 box-shadow">
+        {% endif %}
+
             <img src="/media/{{ product.image }}" class="card-img" alt="">
             <div class="card-header" style="height: 100px">
-                <h4 class="my-0 font-weight-normal">{{ product.name | truncatechars:50}}</h4>
+                <h4 class="my-0 font-weight-normal">{{ product.name | truncatechars:45 }}</h4>
             </div>
             <div class="card-body">
                 <h1 class="card-title pricing-card-title">
                     {{ product.price }} руб.
                 </h1>
-                <p style="height: 70px">{{ product.description | truncatechars:100}}</p>
+                <p style="height: 70px">{{ product.description | truncatechars:105 }}</p>
                 <a href="{% url 'catalog:product_detail' product.pk %}"
                    class="btn btn-lg btn-block btn-outline-primary m-1">Подробнее</a>
-                    <div class="btn-group m-1">
-                        {% if perms.product.can_update_product %}
-                        <a href="{% url 'catalog:product_update' product.pk %}"
-                           class="btn btn-lg btn-block btn-outline-secondary">Редактировать</a>
-                        {% endif %}
-                        {% if perms.product.can_delete_product %}
-                        <a href="{% url 'catalog:product_delete' product.pk %}"
-                           class="btn btn-lg btn-block btn-outline-secondary">Удалить</a>
-                        {% endif %}
-                    </div>
-                    {% if perms.product.can_unpublish_product %}
-                    <form method="post" action="{% url 'catalog:product_unpublish' product.pk %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-lg btn-block btn-outline-danger m-1">
-                            Снять с публикации
-                        </button>
-                    </form>
-                    {% endif %}
+
+                {% if product.status == False %}
+                {% if perms.product.can_publish_product %}
+                <form method="post" action="{% url 'catalog:product_publish' product.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-lg btn-block btn-outline-success m-1">
+                        Опубликовать
+                    </button>
+                </form>
+                {% endif %}
+                {% else %}
+                {% if perms.product.can_unpublish_product %}
+                <form method="post" action="{% url 'catalog:product_unpublish' product.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-lg btn-block btn-outline-danger m-1">
+                        Снять с публикации
+                    </button>
+                </form>
+                {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>
-    {% endif %}
+
     {% endfor %}
 </div>
 {% endblock %}

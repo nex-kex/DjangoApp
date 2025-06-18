@@ -18,4 +18,7 @@ urlpatterns = [
         views.ProductUnpublishView.as_view(),
         name="product_unpublish",
     ),
+    path(
+        "<int:pk>/publish/", views.ProductPublishView.as_view(), name="product_publish"
+    ),
 ]
