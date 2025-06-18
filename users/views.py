@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, UpdateView
 from django.views.generic.edit import FormView
+from django.contrib.auth.models import Group
 
 from .forms import CustomUserCreationForm, UserForm
 from .models import CustomUser
@@ -20,6 +21,7 @@ class RegisterView(FormView):
     def form_valid(self, form):
         try:
             user = form.save()
+            user.groups.add(Group.objects.get(name="Пользователи"))
             login(self.request, user)
             self.send_welcome_email(user.email)
             return super().form_valid(form)

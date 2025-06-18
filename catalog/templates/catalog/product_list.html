@@ -28,7 +28,7 @@
                    class="btn btn-lg btn-block btn-outline-primary m-1">Подробнее</a>
 
                 {% if product.status == False %}
-                {% if perms.product.can_publish_product %}
+                {% if perms.catalog.can_publish_product %}
                 <form method="post" action="{% url 'catalog:product_publish' product.pk %}">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-lg btn-block btn-outline-success m-1">
@@ -37,7 +37,7 @@
                 </form>
                 {% endif %}
                 {% else %}
-                {% if perms.product.can_unpublish_product %}
+                {% if perms.catalog.can_unpublish_product %}
                 <form method="post" action="{% url 'catalog:product_unpublish' product.pk %}">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-lg btn-block btn-outline-danger m-1">

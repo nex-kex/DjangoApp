@@ -31,7 +31,7 @@
                 <button class="btn btn-success" type="button">Купить</button>
                 {% endif %}
 
-                {% if user == product.owner or perms.catalog.update_product %}
+                {% if user == product.owner or perms.catalog.change_product %}
                 <a href="{% url 'catalog:product_update' product.pk %}"
                    class="btn btn-outline-primary">Редактировать</a>
                 {% endif %}
@@ -40,7 +40,7 @@
                    class="btn btn-outline-danger">Удалить</a>
                 {% endif %}
 
-                {% if object.status == True and perms.product.can_unpublish_product %}
+                {% if object.status == True and perms.catalog.can_unpublish_product %}
                 <form method="post" action="{% url 'catalog:product_unpublish' product.pk %}">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger m-1">
@@ -49,7 +49,7 @@
                 </form>
                 {% endif %}
 
-                {% if object.status == False and perms.product.can_publish_product %}
+                {% if object.status == False and perms.catalog.can_publish_product %}
                 <form method="post" action="{% url 'catalog:product_publish' product.pk %}">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-success m-1">
