@@ -36,10 +36,10 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
 
-class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
-    permission_required = "product.create_product"
+    permission_required = "catalog.add_product"
     success_url = reverse_lazy("catalog:product_list")
 
     def form_valid(self, form):
@@ -60,7 +60,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_form_class(self):
         user = self.request.user
-        if user == self.object.owner or user.has_perm("product.update_product"):
+        if user == self.object.owner or user.has_perm("catalog.change_product"):
             return ProductForm
         raise PermissionDenied
 
@@ -74,21 +74,16 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_form_class(self):
         user = self.request.user
-        if user == self.object.owner or user.has_perm("product.delete_product"):
+        if user == self.object.owner or user.has_perm("catalog.delete_product"):
             return ProductForm
         raise PermissionDenied
 
 
 class ProductUnpublishView(LoginRequiredMixin, PermissionRequiredMixin, View):
-    permission_required = "product.can_unpublish_product"
+    permission_required = "catalog.can_unpublish_product"
 
     def post(self, request, *args, **kwargs):
         product = get_object_or_404(Product, pk=self.kwargs["pk"])
-
-        if not request.user.has_perm("product.can_unpublish_product"):
-            return HttpResponseForbidden(
-                "У вас нет прав для изменения статуса публикации продуктов."
-            )
 
         product.status = False
         product.save()
@@ -96,15 +91,11 @@ class ProductUnpublishView(LoginRequiredMixin, PermissionRequiredMixin, View):
         return redirect("catalog:product_list")
 
 
-class ProductPublishView(LoginRequiredMixin, View):
+class ProductPublishView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = "catalog.can_publish_product"
 
     def post(self, request, *args, **kwargs):
         product = get_object_or_404(Product, pk=self.kwargs["pk"])
-
-        if not request.user.has_perm("product.can_publish_product"):
-            return HttpResponseForbidden(
-                "У вас нет прав для изменения статуса публикации продуктов."
-            )
 
         product.status = True
         product.save()
