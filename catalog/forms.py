@@ -35,6 +35,7 @@ class ProductForm(FormControlMixin, forms.ModelForm):
                     'Слово "%(word)s" не должно содержаться в названии продукта.',
                     params={"word": word},
                 )
+
         return name
 
     def clean_description(self):
@@ -47,7 +48,7 @@ class ProductForm(FormControlMixin, forms.ModelForm):
                     params={"word": word},
                 )
 
-        return  description
+        return description
 
     def clean_price(self):
         price = self.cleaned_data.get("price")
