@@ -26,9 +26,38 @@
                 <p class="card-text">
                     {{ object.description }}
                 </p>
-                <div class="input-group mb-3">
-                    <button class="btn btn-outline-primary" type="button">Купить</button>
-                </div>
+
+                {% if object.status == True %}
+                <button class="btn btn-success" type="button">Купить</button>
+                {% endif %}
+
+                {% if user == product.owner or perms.catalog.change_product %}
+                <a href="{% url 'catalog:product_update' product.pk %}"
+                   class="btn btn-outline-primary">Редактировать</a>
+                {% endif %}
+                {% if user == product.owner or perms.catalog.delete_product %}
+                <a href="{% url 'catalog:product_delete' product.pk %}"
+                   class="btn btn-outline-danger">Удалить</a>
+                {% endif %}
+
+                {% if object.status == True and perms.catalog.can_unpublish_product %}
+                <form method="post" action="{% url 'catalog:product_unpublish' product.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger m-1">
+                        Снять с публикации
+                    </button>
+                </form>
+                {% endif %}
+
+                {% if object.status == False and perms.catalog.can_publish_product %}
+                <form method="post" action="{% url 'catalog:product_publish' product.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success m-1">
+                        Опубликовать
+                    </button>
+                </form>
+                {% endif %}
+
                 <p class="card-text"><small class="text-body-secondary">
                     Создано {{ object.created_at | date:"d.m.Y" }}.
                     Последнее обновление {{ object.updated_at | date:"d.m.Y" }}

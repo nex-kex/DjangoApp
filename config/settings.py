@@ -114,7 +114,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 AUTH_USER_MODEL = "users.CustomUser"
 
-LOGIN_REDIRECT_URL = 'catalog:product_list'
-LOGOUT_REDIRECT_URL = 'catalog:product_list'
+LOGIN_REDIRECT_URL = "catalog:product_list"
+LOGOUT_REDIRECT_URL = "catalog:product_list"
 
-LOGIN_URL = 'users:login'
+LOGIN_URL = "users:login"
