@@ -13,6 +13,10 @@ from django.views.generic import (
     View,
 )
 
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+from django.core.cache import cache
+
 from .forms import ProductForm
 from .models import Product
 
@@ -32,8 +36,18 @@ class ProductListView(ListView):
     model = Product
 
 
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
+
+    def get_queryset(self):
+        queryset = cache.get('products_queryset')
+
+        if not queryset:
+            queryset = super().get_queryset()
+            cache.set('products_queryset', queryset, 60 * 15)
+
+        return queryset
 
 
 class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
