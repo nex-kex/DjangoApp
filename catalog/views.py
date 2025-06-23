@@ -1,24 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    ListView,
-    TemplateView,
-    UpdateView,
-    View,
-)
-
-from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
-from django.core.cache import cache
+from django.views.decorators.cache import cache_page
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView, View
 
 from .forms import ProductForm
-from .models import Product
+from .models import Category, Product
 
 
 class ContactsView(TemplateView):
@@ -35,19 +26,32 @@ class ContactsView(TemplateView):
 class ProductListView(ListView):
     model = Product
 
-
-@method_decorator(cache_page(60 * 15), name='dispatch')
-class ProductDetailView(LoginRequiredMixin, DetailView):
-    model = Product
-
     def get_queryset(self):
-        queryset = cache.get('products_queryset')
+        queryset = cache.get("products_queryset")
 
         if not queryset:
             queryset = super().get_queryset()
-            cache.set('products_queryset', queryset, 60 * 15)
+            cache.set("products_queryset", queryset, 60 * 15)
 
         return queryset
+
+
+class CategoryListView(ListView):
+    model = Category
+
+    def get_queryset(self):
+        queryset = cache.get("categories_queryset")
+
+        if not queryset:
+            queryset = super().get_queryset()
+            cache.set("categories_queryset", queryset, 60 * 15)
+
+        return queryset
+
+
+@method_decorator(cache_page(60 * 15), name="dispatch")
+class ProductDetailView(LoginRequiredMixin, DetailView):
+    model = Product
 
 
 class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):

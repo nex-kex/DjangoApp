@@ -17,15 +17,9 @@ class UserForm(UserCreationForm):
 
 
 class CustomUserCreationForm(UserCreationForm):
-    avatar = forms.ImageField(
-        required=False, help_text="Изображение. Необязательное поле."
-    )
-    phone_number = forms.CharField(
-        max_length=15, required=False, help_text="Номер телефона. Необязательное поле."
-    )
-    country = forms.CharField(
-        max_length=50, required=False, help_text="Страна. Необязательное поле."
-    )
+    avatar = forms.ImageField(required=False, help_text="Изображение. Необязательное поле.")
+    phone_number = forms.CharField(max_length=15, required=False, help_text="Номер телефона. Необязательное поле.")
+    country = forms.CharField(max_length=50, required=False, help_text="Страна. Необязательное поле.")
     usable_password = None
 
     def __init__(self, *args, **kwargs):

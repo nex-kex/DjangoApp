@@ -13,8 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="product",
             name="status",
-            field=models.BooleanField(
-                blank=True, default=False, null=True, verbose_name="Статус публикации"
-            ),
+            field=models.BooleanField(blank=True, default=False, null=True, verbose_name="Статус публикации"),
         ),
     ]
