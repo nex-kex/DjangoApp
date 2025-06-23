@@ -49,17 +49,13 @@
             <div class="col-6 col-md">
                 <h5>Категории</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Рассылки</a></li>
-                    <li><a class="text-muted" href="#">Телеграм боты</a></li>
-                    <li><a class="text-muted" href="#">Полезные утилиты</a></li>
-                    <li><a class="text-muted" href="#">Веб-приложения</a></li>
-                    <li><a class="text-muted" href="#">Микросервисы</a></li>
+                    <li><a class="text-muted" href="{% url 'catalog:category_list' %}">Список категорий</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md">
                 <h5>Дополнительно</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Мы пишем</a></li>
+                    <li><a class="text-muted" href="{% url 'blog:post_list' %}">Наш блог</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md">
