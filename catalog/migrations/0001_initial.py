@@ -25,15 +25,11 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "name",
-                    models.CharField(
-                        max_length=150, verbose_name="Наименование категории"
-                    ),
+                    models.CharField(max_length=150, verbose_name="Наименование категории"),
                 ),
                 (
                     "description",
-                    models.TextField(
-                        blank=True, null=True, verbose_name="Описание категории"
-                    ),
+                    models.TextField(blank=True, null=True, verbose_name="Описание категории"),
                 ),
             ],
             options={
@@ -56,15 +52,11 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "name",
-                    models.CharField(
-                        max_length=150, verbose_name="Наименование продукта"
-                    ),
+                    models.CharField(max_length=150, verbose_name="Наименование продукта"),
                 ),
                 (
                     "description",
-                    models.TextField(
-                        blank=True, null=True, verbose_name="Описание продукта"
-                    ),
+                    models.TextField(blank=True, null=True, verbose_name="Описание продукта"),
                 ),
                 ("image", models.ImageField(upload_to="catalog/media/")),
                 ("price", models.IntegerField(verbose_name="Цена")),

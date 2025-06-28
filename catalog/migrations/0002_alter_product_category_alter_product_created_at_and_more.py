@@ -31,15 +31,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="product",
             name="image",
-            field=models.ImageField(
-                upload_to="catalog/media/", verbose_name="Изображение"
-            ),
+            field=models.ImageField(upload_to="catalog/media/", verbose_name="Изображение"),
         ),
         migrations.AlterField(
             model_name="product",
             name="updated_at",
-            field=models.DateField(
-                auto_now=True, verbose_name="Дата последнего изменения"
-            ),
+            field=models.DateField(auto_now=True, verbose_name="Дата последнего изменения"),
         ),
     ]

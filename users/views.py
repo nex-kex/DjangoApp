@@ -1,13 +1,13 @@
 import os
 
 from django.contrib.auth import login
+from django.contrib.auth.models import Group
 from django.core.mail import send_mail
 from django.db.utils import IntegrityError
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, UpdateView
 from django.views.generic.edit import FormView
-from django.contrib.auth.models import Group
 
 from .forms import CustomUserCreationForm, UserForm
 from .models import CustomUser
