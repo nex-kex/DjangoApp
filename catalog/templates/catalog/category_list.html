@@ -1,0 +1,26 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Mystore{% endblock %}
+
+{% block content %}
+
+{% include 'catalog/header.html' %}
+
+<div class="row text-center">
+    {% for category in object_list %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header" style="height: 78px">
+                <h4 class="my-0 font-weight-normal">{{ category.name | truncatechars:30 }}</h4>
+            </div>
+            <div class="card-body">
+                <p style="height: 70px">{{ category.description | truncatechars:100 }}</p>
+                <a href="{% url 'catalog:category_products_list' category.pk %}"
+                   class="btn btn-lg btn-block btn-outline-primary m-1">Товары</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

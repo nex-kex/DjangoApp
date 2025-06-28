@@ -1,0 +1,40 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Страница пользователя{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-6">
+        <img src="/media/{{ object.avatar }}" class="card-img-top" alt="">
+    </div>
+    <div class="col-6">
+        <div class="card m-3">
+            <div class="card-body">
+                <h1 class="fw-bold">
+                    {{ object.first_name }} {{ object.last_name }}
+                </h1>
+                <p class="card-text">
+                    Email: {{ object.email }}
+                </p>
+                <p class="card-text">
+                    Телефон: {{ object.phone_number }}
+                </p>
+                <p class="card-text">
+                    Страна: {{ object.country }}
+                </p>
+                <p class="card-text"><small class="text-body-secondary">
+                    Дата регистрации: {{ object.date_joined | date:"d.m.Y" }}
+                </small></p>
+                <div class="mb-3">
+                    <form method="post" action="{% url 'blog:publish' object.pk %}">
+                        <a href="{% url 'users:user_update' object.pk %}"
+                           class="btn btn-outline-secondary">Редактировать</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
